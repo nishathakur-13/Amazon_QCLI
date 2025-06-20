@@ -8,7 +8,7 @@ pygame.init()
 pygame.mixer.init(frequency=22050, size=-16, channels=2, buffer=512)
 
 # Game constants
-SCREEN_WIDTH = 800
+SCREEN_WIDTH = 1200
 SCREEN_HEIGHT = 600
 FPS = 60
 
@@ -607,7 +607,7 @@ class Game:
             if event.type == pygame.QUIT:
                 self.running = False
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE and not self.game_over:
+                if (event.key == pygame.K_SPACE or event.key == pygame.K_s) and not self.game_over:  # Add support for 'S' key
                     # Shoot bullet
                     bullet_x = self.player.x + self.player.width // 2 - BULLET_WIDTH // 2
                     bullet_y = self.player.y
@@ -639,7 +639,7 @@ class Game:
             if event.type == pygame.QUIT:
                 self.running = False
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE and not self.game_over:
+                if (event.key == pygame.K_SPACE or event.key == pygame.K_d) and not self.game_over:  # Add support for 'D' key
                     # Shoot bullet
                     bullet_x = self.player.x + self.player.width // 2 - BULLET_WIDTH // 2
                     bullet_y = self.player.y
@@ -694,9 +694,9 @@ class Game:
         
         # Handle continuous key presses
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
+        if keys[pygame.K_LEFT] or keys[pygame.K_a]:  # Add support for 'A' key
             self.player.move_left()
-        if keys[pygame.K_RIGHT]:
+        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:  # Add support for 'D' key
             self.player.move_right()
         
         # Update bullets
